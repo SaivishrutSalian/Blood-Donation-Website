@@ -1,10 +1,20 @@
 const cryptoJs = require('crypto-js');
+
+const jwt = require('jsonwebtoken');
+const userSchema = require('../models/User');
+const dotenv = require('dotenv');
+dotenv.config();
+
+// Register User
+
+
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const dotenv = require('dotenv')
 dotenv.config();
 
 // Register User
+
 const registerUser = async(req, res) => {
     const newUser = User({
         name: req.body.name,
@@ -14,13 +24,28 @@ const registerUser = async(req, res) => {
             process.env.PASS
         ).toString()
     });
+
+    try{
+        const user = await newUser.save();
+        res.status(201).json(user);
+    }catch(error){
+
     try {
         const user = await newUser.save();
         res.status(201).json(user);
     } catch (error) {
+
         res.status(500).json(error);
     }
 }
 
 
+// Login User
+
+// const loginUser = () => {
+
+// }
+
+
 //Login User
+
