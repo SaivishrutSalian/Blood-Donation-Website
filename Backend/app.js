@@ -15,4 +15,8 @@ app.use(express.json());
 // Routes
 app.use("/api/v1/auth", authRoute);
 app.use('/api/v1/donors', donorRoute);
+
 app.use('/api/v1/prospects', prospectRoute);
+
+app.use('/api/v1/prospects', prospectRoute);
+
