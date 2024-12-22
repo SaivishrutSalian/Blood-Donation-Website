@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userSchema = mongoose.Schema({
     name: {type: String, require: true},
     email: {type: String, require: true},
@@ -7,7 +8,11 @@ const userSchema = mongoose.Schema({
     status: {type: Number, default: 0},
     role: {type: String, default: 'admin'}
 }, {
+
+    timestamp: true
+
     timestamp : true
+
 })
 
 module.exports = mongoose.model('User', userSchema);
