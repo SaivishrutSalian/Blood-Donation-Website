@@ -2,7 +2,12 @@
 
 const Admin = () => {
   return (
-    <div>Admin</div>
+    <div className="flex justify-between h-[100vh]">
+      <div>
+
+      </div>
+      <div></div>
+    </div>
   )
 }
 
