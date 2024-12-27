@@ -18,7 +18,7 @@ const Prospects = () => {
       renderCell: () => {
         return (
           <>
-            <Link to={`/prospect/123`}>
+            <Link to={`/admin/prospect/123`}>
               <button className='bg-gray-400 text-white cursor-pointer w-[70px]'>Approve</button>
             </Link>
           </>
