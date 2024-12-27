@@ -20,7 +20,8 @@ const Contact = () => {
                 <input type="Number" className="w-[350px] p-[15px]" placeholder="50kg" />
 
                 <label htmlFor="" className="text-[18px] mt-[10px] font-semibold">Blood Group</label>
-                <select className="w-[350px] p=[15px]">
+                <select className="w-[350px] p-[15px]">
+                    <option value="">Select Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -34,8 +35,8 @@ const Contact = () => {
                 <label htmlFor="" className="text-[18px] mt-[10px] font-semibold">Age</label>
                 <input type="Number" className="w-[350px] p-[15px]" placeholder="20" />
 
-                <label htmlFor="" className="text-[18px] mt-[10px] font-semibold">Diseases</label>
-                <input type="textarea" className="w-[350px] p-[15px]" placeholder="N/A" />
+                <label htmlFor="" className="text-[18px] mt-[10px] font-semibold">Do you have any diseases?</label>
+                <textarea type="Number" className="w-[350px] p-[15px]" placeholder="N/A" />
 
                 <button className="bg-red-500 p-3 mt-3 w-[350px] cursor-pointer text-white">Submit</button>
             </div>
