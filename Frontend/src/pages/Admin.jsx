@@ -92,7 +92,7 @@ const Admin = () => {
               startAngle: -45,
               endAngle: 225,
               cx: 150,
-              cy: 150,
+              cy: 100,
             }
           ]}
         />

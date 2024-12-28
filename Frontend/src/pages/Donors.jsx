@@ -1,8 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { publicRequest } from '../requestMethods.js';
 
 const Donors = () => {
+  const [donors, setDonors] = useState([]);
   const columns = [
     { field: "_id", headerName: "ID", width: 90 },
     { field: "name", headerName: "Name", width: 90 },
@@ -14,10 +17,10 @@ const Donors = () => {
       field: "edit",
       headerName: "Edit",
       width: 150,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/donor/123`}>
+            <Link to={`/admin/donor/${params.row._id}`}>
               <button className="bg-gray-400 text-white cursor-pointer w-[70px]">
                 Edit
               </button>
@@ -30,11 +33,11 @@ const Donors = () => {
       field: "delete",
       headerName: "Delete",
       width: 150,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <>
             <FaTrash
-              className="text-red-500 cursor-pointer m-2"
+              className="text-red-500 cursor-pointer m-2" onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -42,89 +45,39 @@ const Donors = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 5,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 6,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 7,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 8,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 9,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-    {
-      id: 10,
-      name: "John Doe",
-      address: "123 Main St, AnyTown, USA",
-      bloodType: "A+ ",
-      disease: "Diabetes"
-    },
-  ];
+  useEffect(() => {
+    const getDonors = async () => {
+      try {
+        const res = await publicRequest.get('/donors');
+        setDonors(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getDonors()
+  }, [])
+
+  const handleDelete = async (id) => {
+    try {
+      await publicRequest.delete(`/donors/${id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="w-[70vw]">
       <div className="flex items-center justify-between m-[30px]">
         <h1 className="m-[20px] text-[20px] font-semibold">All Donors</h1>
         <Link to='/admin/newdonor'>
-        <button className="bg-[#1e1e1e] text-white p-[10px] cursor-pointer font-semibold">New Donor</button>
+          <button className="bg-[#1e1e1e] text-white p-[10px] cursor-pointer font-semibold">New Donor</button>
         </Link>
       </div>
 
       <div className="m-[30px]">
-        <DataGrid checkboxSelection rows={rows} columns={columns} />
+        <DataGrid rows={donors}
+          getRowId={(row) => row._id}
+          checkboxSelection columns={columns} />
       </div>
     </div>
   )
