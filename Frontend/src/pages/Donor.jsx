@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../requestMethods";
 
@@ -6,7 +6,15 @@ const Donor = () => {
   const [donor, setDonor] = useState({});
   const location = useLocation();
   const donorId = location.pathname.split('/')[3];
-  
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
+
   useEffect(() => {
     const getDonor = async () => {
       try {
@@ -18,6 +26,15 @@ const Donor = () => {
     }
     getDonor();
   }, []);
+
+  const handleUpdate = async () => {
+    try {
+      await publicRequest.put(`/donors/${donorId}`, inputs);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="m-[20px] p-[20px] h-[80vh] w-[250px]">
@@ -25,18 +42,31 @@ const Donor = () => {
         <div className="flex flex-col my-[12px]">
           <label htmlFor="">Name</label>
           <input type="text" placeholder={donor.name}
+            name="name"
+            value={inputs.name || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]"
           />
           <label htmlFor="">Address</label>
           <input type="text" placeholder={donor.address}
+            name="address"
+            value={inputs.address || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]"
           />
           <label htmlFor="">Tel</label>
           <input type="text" placeholder={donor.tel}
+            name="tel"
+            value={inputs.tel || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]"
           />
           <label htmlFor="" >BloodGroup</label>
-          <select className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]" >
+          <select
+            name="bloodgroup"
+            value={inputs.bloodgroup || ""}
+            onChange={handleChange}
+            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]" >
             <option value="">Select Blood Group</option>
             <option value="A+">A+</option>
             <option value="A-">A-</option>
@@ -49,6 +79,9 @@ const Donor = () => {
           </select>
           <label htmlFor="">Email</label>
           <input type="email" placeholder={donor.email}
+            name="email"
+            value={inputs.email || ""}
+            onChange={handleChange}
             className="border-[#555] border-2 border-solid p-[10px] mt-[10px] mb-[10px] w-[300px]"
           />
         </div>
@@ -57,16 +90,26 @@ const Donor = () => {
         <div className="flex flex-col my-[12px]">
           <label htmlFor="">Weight</label>
           <input type="Number" placeholder={`${donor.weight} kg`}
+            name="weight"
+            value={inputs.weight || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]"
           />
           <label htmlFor="">Date</label>
           <input type="date" placeholder={donor.date}
+            name="date"
+            value={inputs.date || ""}
+            onChange={handleChange}
             className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]"
           />
           <label htmlFor="" className="text-[18px] mt-[10px] font-semibold">Do you have any diseases?</label>
-          <textarea type="Number" placeholder={donor.diseases} className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]" />
+          <textarea type="Number" placeholder={donor.diseases}
+            name="diseases"
+            value={inputs.diseases || ""}
+            onChange={handleChange}
+            className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px] mt-[10px] mb-[10px]" />
 
-          <button className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]"> Update</button>
+          <button className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]" onClick={handleUpdate}> Update</button>
         </div>
       </div>
     </div>

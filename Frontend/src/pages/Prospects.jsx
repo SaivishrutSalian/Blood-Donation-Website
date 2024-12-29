@@ -53,4 +53,4 @@ const Prospects = () => {
   )
 }
 
-export default Prospects
+export default Prospects;

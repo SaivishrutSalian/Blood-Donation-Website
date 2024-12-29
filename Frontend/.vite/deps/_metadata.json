@@ -1,0 +1,103 @@
+{
+  "hash": "52af9dad",
+  "configHash": "b647e41d",
+  "lockfileHash": "536cbfd4",
+  "browserHash": "3f31e704",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "7f627e3b",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "52bce2a4",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "10fd36ec",
+      "needsInterop": false
+    },
+    "react-scroll": {
+      "src": "../../node_modules/react-scroll/modules/index.js",
+      "file": "react-scroll.js",
+      "fileHash": "d506ffd7",
+      "needsInterop": true
+    },
+    "@mui/x-data-grid": {
+      "src": "../../node_modules/@mui/x-data-grid/index.js",
+      "file": "@mui_x-data-grid.js",
+      "fileHash": "ce7a2283",
+      "needsInterop": false
+    },
+    "react-icons/fa": {
+      "src": "../../node_modules/react-icons/fa/index.mjs",
+      "file": "react-icons_fa.js",
+      "fileHash": "02ad5ff1",
+      "needsInterop": false
+    },
+    "@mui/x-charts/Gauge": {
+      "src": "../../node_modules/@mui/x-charts/Gauge/index.js",
+      "file": "@mui_x-charts_Gauge.js",
+      "fileHash": "aa1df447",
+      "needsInterop": false
+    },
+    "@mui/x-charts/LineChart": {
+      "src": "../../node_modules/@mui/x-charts/LineChart/index.js",
+      "file": "@mui_x-charts_LineChart.js",
+      "fileHash": "546c7160",
+      "needsInterop": false
+    },
+    "@mui/x-charts/PieChart": {
+      "src": "../../node_modules/@mui/x-charts/PieChart/index.js",
+      "file": "@mui_x-charts_PieChart.js",
+      "fileHash": "1828cfcc",
+      "needsInterop": false
+    },
+    "react-toastify": {
+      "src": "../../node_modules/react-toastify/dist/index.mjs",
+      "file": "react-toastify.js",
+      "fileHash": "94df4bf9",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "6b5a0a1b",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-SFCRVSJR": {
+      "file": "chunk-SFCRVSJR.js"
+    },
+    "chunk-KEPMZ2XL": {
+      "file": "chunk-KEPMZ2XL.js"
+    },
+    "chunk-UP6LQVYV": {
+      "file": "chunk-UP6LQVYV.js"
+    },
+    "chunk-ZNU5YPPI": {
+      "file": "chunk-ZNU5YPPI.js"
+    },
+    "chunk-7IQKZSEX": {
+      "file": "chunk-7IQKZSEX.js"
+    },
+    "chunk-2KHBIA62": {
+      "file": "chunk-2KHBIA62.js"
+    },
+    "chunk-FJ6XD5FS": {
+      "file": "chunk-FJ6XD5FS.js"
+    },
+    "chunk-TWJRYSII": {
+      "file": "chunk-TWJRYSII.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}
