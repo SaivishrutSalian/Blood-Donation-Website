@@ -1,56 +1,94 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 import { publicRequest } from "../requestMethods";
 
-const Prospect = () => {
-  const [prospect, setProspect] = useState({});
-  const location = useLocation();
-  const prospectId = location.pathname.split('/')[3];
 
+const Prospect = () => {
+  const location = useLocation();
+  const prospectId = location.pathname.split("/")[3];
+  const [prospect, setProspect] = useState({});
+  const navigate = useNavigate();
+  console.log(prospectId);
   useEffect(() => {
     const getProspect = async () => {
       try {
-        const res = await publicRequest.get(`/prospect/find/${prospectId}`);
+        const res = await publicRequest.get("/prospects/find/" + prospectId);
         setProspect(res.data);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     getProspect();
-  }, []);
+  }, [prospectId]);
+
+  const handleApprove = async () => {
+    try {
+      await publicRequest.post("/donors", {
+        name: prospect.name,
+        address: prospect.address,
+        email:prospect.email,
+        tel: prospect.tel,
+        bloodgroup:prospect.bloodgroup,
+        diseases: prospect.diseases,
+        date: prospect.date,
+        weight: prospect.weight,
+      });
+      await publicRequest.delete(`/prospects/${prospectId}`);
+      navigate('/admin/donors');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="flex item-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="m-[20px] h-[80vh] w-[450px] shadow-lg">
         <h2 className="font-semibold m-[30px]">Prospect</h2>
         <ul className="m-[30px]">
-          <li className="mt-[14px]">
-            <strong>Name: </strong> {prospect.name}
+          <li className="mt-[10px]">
+            <strong className="font-semibold">Name:</strong> {prospect.name}
           </li>
-          <li className="mt-[14px]">
-            <strong>Address: </strong>{prospect.address}
+          <li className="mt-[10px]">
+            <strong className="font-semibold">Address:</strong>
+            {prospect.address}
           </li>
-          <li className="mt-[14px]">
-            <strong>Tel: </strong> {prospect.tel}
+          <li className="mt-[10px]">
+            <strong className="font-semibold">Tel:</strong>
+            {prospect.tel}
           </li>
-          <li className="mt-[14px]">
-            <strong>BloodType: </strong> {prospect.bloodgroup}
+          <li className="mt-[5px]">
+            <strong className="font-semibold">Blood Type:</strong>
+            {prospect.bloodgroup}
           </li>
-          <li className="mt-[14px]">
-            <strong>Diseases: </strong> {prospect.diseases}
+          <li className="mt-[5px]">
+            <strong className="font-semibold">Disease:</strong>
+            {prospect.diseases}
           </li>
-          <li className="mt-[14px]">
-            <strong>Date: </strong> {prospect.date}
+          <li className="mt-[5px]">
+            <strong className="font-semibold">Date:</strong>
+            {prospect.date}
           </li>
-          <li className="mt-[14px]">
-            <strong>Weight: </strong> {prospect.weight}
+          <li className="mt-[5px]">
+            <strong className="font-semibold">Weight:</strong>
+            {prospect.weight}Kg
+          </li>
+          <li className="mt-[5px]">
+            <strong className="font-semibold">Status:</strong>pending
           </li>
         </ul>
-        <span className="block m-[10px]"> Do you want to approve James to a Donor?</span>
-        <button className="bg-red-500 text-white cursor-pointer p-[5px] w-[150px] m-[10px]">Approve</button>
+        <span className="block m-[10px]">
+          Do you want to approve James to a donor?
+        </span>
+        <button
+          className="bg-red-400 text-white cursor-pointer p-[5px] w-[150px] m-[10px]"
+          onClick={handleApprove}
+        >
+          Approve
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Prospect
+export default Prospect;

@@ -2,8 +2,27 @@ import { Gauge } from '@mui/x-charts/Gauge';
 import { LineChart } from '@mui/x-charts/LineChart'
 import { FaUser } from 'react-icons/fa';
 import { PieChart } from '@mui/x-charts/PieChart';
+import { useEffect, useState } from 'react';
+import { publicRequest } from '../requestMethods';
 
 const Admin = () => {
+  const [bloodGroupData, setBloodGroupData] = useState([])
+  useEffect(() => {
+    const getBloodGroupStats = async () => {
+      try {
+        const res = await publicRequest.get("/donors/stats");
+        const transformedData = res.data.map((item, index) => ({
+          id: index,
+          value: item.count,
+          label: `Blood Group ${item._id}`
+        }))
+        setBloodGroupData(transformedData);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getBloodGroupStats();
+  }, []);
   return (
     <div className="flex justify-between h-[100vh]">
       <div className="flex flex-col">
@@ -62,29 +81,7 @@ const Admin = () => {
         <PieChart
           series={[
             {
-              data: [
-                {
-                  id: 0,
-                  value: 10,
-                  label: "Blood Group A"
-                },
-                {
-                  id: 1,
-                  value: 15,
-                  label: "Blood Group O+"
-                },
-                {
-                  id: 3,
-                  value: 20,
-                  label: "Blood Group AB"
-                },
-                {
-                  id: 4,
-                  value: 30,
-                  label: "Blood Group O-"
-                }
-
-              ],
+              data: bloodGroupData,
               innerRadius: 50,
               outerRadius: 70,
               paddingAngle: 5,

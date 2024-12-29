@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json("You have not registered");
     }
-    const hashedPassword = CryptoJS.AES.decrypt(
+    const hashedPassword = cryptoJs.AES.decrypt(
       user.password,
       process.env.PASS
     );
@@ -49,4 +49,5 @@ const loginUser = async (req, res) => {
     res.status(500).json(error)
   }
 };
+console.log(loginUser);
 module.exports = {loginUser, registerUser};

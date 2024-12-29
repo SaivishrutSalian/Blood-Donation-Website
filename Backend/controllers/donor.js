@@ -75,7 +75,7 @@ const getDonorsStats = async (req, res) => {
                 }
             }
         ]);
-        res.status(201).json(stats)
+        res.status(201).json(status)
     } catch (error) {
         res.status(500).json(error);
     }
